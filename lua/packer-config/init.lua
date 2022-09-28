@@ -1,8 +1,23 @@
+local status, packer = pcall(require, "packer")
+if (not status) then
+  print("Packer is not installed")
+  return
+end
+
+
+
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use {
-        'kyazdani42/nvim-tree.lua',
-        requires = {'kyazdani42/nvim-web-devicons'},
+    'nvim-treesitter/nvim-treesitter',
+     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    } 
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+      },
+      tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
     use 'EdenEast/nightfox.nvim'
     use {
@@ -25,6 +40,12 @@ require('packer').startup(function(use)
     use 'hrsh7th/nvim-cmp'
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
+    use 'onsails/lspkind-nvim' 
+    use 'norcalli/nvim-colorizer.lua'
+    use 'jose-elias-alvarez/null-ls.nvim'
+    use 'MunifTanjim/prettier.nvim'
+    use 'glepnir/lspsaga.nvim'
+    use 'windwp/nvim-ts-autotag'
 
     -- autocomplete config
 local cmp = require 'cmp'
